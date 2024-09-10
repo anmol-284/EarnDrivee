@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+
+.bg-pattern {
+  background-image: url('https://i.postimg.cc/k4wvNvj2/5172658.jpg');
+  background-size: cover;
+}
+
+.btn {
+  @apply text-[#090909] py-2.5 px-7 text-lg rounded-md bg-[#e8e8e8] cursor-pointer border border-[#e8e8e8] transition-all duration-300;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+}
+
+.btn:active {
+  @apply text-gray-500;
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+}
