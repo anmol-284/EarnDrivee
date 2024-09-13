@@ -5,6 +5,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import Cookies from 'js-cookie';
 import { ImProfile } from "react-icons/im";
 import { Link } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode'; // Import jwt-decode
 
 // Function to get the token from Cookies
 const getToken = () => {
@@ -38,10 +39,14 @@ const Demo = () => {
   useEffect(() => {
     const token = getToken();
     if (token) {
-      // Decode the token here if it's JWT or fetch user data
-      // Assuming JWT, you can use jwt-decode or similar library
-      const decodedToken = JSON.parse(atob(token.split('.')[1]));
-      setUserInfo(decodedToken);
+      try {
+        // Decode the token using jwt-decode
+        const decodedToken = jwtDecode(token);
+        setUserInfo(decodedToken);
+      } catch (error) {
+        console.error('Failed to decode token:', error);
+        toast.error('Invalid token format');
+      }
     }
   }, []);
 
@@ -192,47 +197,51 @@ const Demo = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               className="bg-gray-700 text-gray-200 border-0 rounded-md p-[3px] mb-2 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
-              rows="3"
+              rows="4"
             />
             <input
+              type="file"
+              accept="image/*"
               onChange={handleFileChange}
               className="bg-gray-700 text-gray-200 border-0 rounded-md p-[3px] mb-2 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
-              type="file"
             />
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mt-4"
+              className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition ease-in-out duration-150"
             >
-              List Bike
+              Submit
             </button>
           </form>
         </div>
-        <div className="absolute top-10 right-12">
-          <div className="group duration-500 -rotate-12 hover:-rotate-0 hover:skew-x-1 skew-x-0 hover:translate-x-6 hover:translate-y-12">
-            <div
-              onClick={toggleDropdown}
-              className="cursor-pointer group-hover:duration-400 relative rounded-2xl w-[180px] h-[100px] bg-zinc-800 text-gray-50 flex flex-col justify-center items-center gap-1 before:-skew-x-12 before:rounded-2xl before:absolute before:content-[''] before:bg-neutral-700 before:right-3 before:top-0 before:w-[190px] before:h-[110px] before:-z-10"
-            >
-              <span className="text-3xl font-bold">
-                {userInfo ? userInfo.firstname.charAt(0).toUpperCase() + userInfo.lastname.charAt(0).toUpperCase() : 'DP'}
-              </span>
-              <p className="text-amber-300 font-thin">
-                {userInfo ? userInfo.firstname.toUpperCase() + " " + userInfo.lastname.toUpperCase() : 'Default User'}
-              </p>
-            </div>
-            {showDropdown && (
-              <div className="absolute top-16 right-0 mt-12 w-48 bg-zinc-800 rounded-md shadow-lg z-10">
-                <Link to="/profile" className="flex justify-start gap-2 px-4 py-2 text-white hover:bg-zinc-700">
-                  <ImProfile className='mt-[3px]' />My Profile
-                </Link>
-                <button onClick={handleLogout} className="flex justify-start w-full text-left px-4 py-2 gap-2 text-white hover:bg-zinc-700">
-                  <IoMdLogOut className='mt-[3px]' />Logout
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
       </div>
+      {userInfo && (
+        <div className="absolute top-2 right-2">
+          <button
+            className="text-gray-200 hover:text-white focus:outline-none"
+            onClick={toggleDropdown}
+          >
+            {userInfo.name}
+          </button>
+          {showDropdown && (
+            <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-lg z-20">
+              <Link
+                to="/profile"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              >
+                <ImProfile className="inline-block mr-2" />
+                Profile
+              </Link>
+              <button
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                onClick={handleLogout}
+              >
+                <IoMdLogOut className="inline-block mr-2" />
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

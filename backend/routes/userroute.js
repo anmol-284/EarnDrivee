@@ -4,7 +4,7 @@ const { authenticateUser } = require('../Auth/Auth'); // Middleware for authenti
 
 // Import controllers
 const { register, login, logout } = require('../controllers/user');
-const { postbike, getBikes } = require('../controllers/bike');
+const { postbike, getBikes, MyBikes, MyRides } = require('../controllers/bike');
 const { createOrder, verifyPayment, getKey } = require('../controllers/payment');
 const { forgot,reset } = require('../controllers/ForgotPassword');
 
@@ -20,5 +20,7 @@ router.get('/bikes' ,getBikes);
 router.get('/getkey' ,getKey);
 router.post('/forgot-password',forgot);
 router.post('/reset-password/:id/:token',reset);
+router.get('/mybikes', authenticateUser, MyBikes);
+router.get('/myrides', authenticateUser, MyRides);
 
 module.exports = router;

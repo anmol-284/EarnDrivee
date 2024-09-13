@@ -82,7 +82,7 @@ const Dashboard = () => {
             <Link to="/book">
               <button class="uppercase smky-btn3 mb-8 mt-4 relative hover:text-[#ffffff] py-2 px-6 after:absolute after:h-1 after:hover:h-[200%] transition-all duration-500 hover:transition-all hover:duration-500 after:transition-all after:duration-500 after:hover:transition-all after:hover:duration-500 overflow-hidden z-20 after:z-[-20] after:bg-[#abd373] after:rounded-t-full after:w-full after:bottom-0 after:left-0 text-zinc-500">Rent a bike</button>
             </Link>
-            <Link to="/list">
+            <Link to="/listBikes">
               <button class="uppercase smky-btn3 ml-[3px] relative hover:text-[#ffffff] py-2 px-6 after:absolute after:h-1 after:hover:h-[200%] transition-all duration-500 hover:transition-all hover:duration-500 after:transition-all after:duration-500 after:hover:transition-all after:hover:duration-500 overflow-hidden z-20 after:z-[-20] after:bg-[#abd373] after:rounded-t-full after:w-full after:bottom-0 after:left-0 text-zinc-500">List a bike</button>
             </Link>
           </div>

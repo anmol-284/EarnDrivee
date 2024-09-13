@@ -200,7 +200,7 @@ const Document = () => {
 
     const handleSubmit = () => {
         toast.success('Bike Listed Successfully.');
-        navigate('/bikes');
+        navigate('/book');
     };
 
     return (
