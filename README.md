@@ -38,6 +38,8 @@ Our Bike Rental Portal aims to create a seamless platform where bike owners can 
 
 ![App Screenshot](https://i.postimg.cc/xTDjMQ7Y/Screenshot-2024-09-14-233006.png)
 
+![App Screenshot](https://i.postimg.cc/sggfPWK5/Screenshot-2025-06-07-094911.png)
+
 
 
 
