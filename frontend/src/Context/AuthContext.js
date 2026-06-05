@@ -11,7 +11,13 @@ export const useAuthContext = () => {
 // AuthContextProvider component to provide the auth state to its children
 export const AuthContextProvider = ({ children }) => {
   // Initialize authUser state with the value from localStorage or null if not available
-  const [authUser, setAuthUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
+  const [authUser, setAuthUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("user")) || null;
+    } catch {
+      return null;
+    }
+  });
 
   // Provide the authUser state and setAuthUser function to the children
   return (

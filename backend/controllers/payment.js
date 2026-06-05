@@ -13,6 +13,7 @@ const razorpayInstance = new Razorpay({
 exports.createOrder = async (req, res) => {
 
     const { bikeId, amount, currency = 'INR' } = req.body;
+    const userId = req.user && req.user.id;
     console.log(req.body);
     // Validate amount
     if (!amount) {
@@ -39,6 +40,7 @@ exports.createOrder = async (req, res) => {
         // Create a new payment record in your database
         const newPayment = new Payment({
             bikeId,
+            userId,
             razorpay_order_id: order.id,
         });
 
@@ -78,8 +80,10 @@ exports.verifyPayment = async (req, res) => {
     console.log('Expected Signature:', expectedSignature);
     console.log('Received Signature:', razorpay_signature);
 
-    // Check if the received signature matches the expected signature
-    const isAuthentic = expectedSignature === razorpay_signature;
+    // Check if the received signature matches the expected signature (constant-time comparison)
+    const isAuthentic =
+        expectedSignature.length === razorpay_signature.length &&
+        crypto.timingSafeEqual(Buffer.from(expectedSignature), Buffer.from(razorpay_signature));
 
     if (isAuthentic) {
         try {

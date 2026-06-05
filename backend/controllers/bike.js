@@ -54,7 +54,7 @@ exports.postbike = async (req, res) => {
   } catch (error) {
     // Log the error and send an error response
     console.error('Error while listing bike:', error);
-    res.status(400).json({
+    res.status(500).json({
       message: 'Failed to list bike',
       error: error.message
     });
@@ -109,7 +109,7 @@ exports.MyBikes = async (req, res) => {
 
 exports.MyRides = async (req, res) => {
     try {
-        const userId = req.user._id; // Extract the user ID from the authenticated user
+        const userId = req.user.id; // Extract the user ID from the authenticated user
 
         const payments = await Payment.find({ userId }).populate('bikeId'); // Assuming Payment model has userId reference
 

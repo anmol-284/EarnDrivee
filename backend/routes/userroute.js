@@ -14,7 +14,7 @@ router.post("/login", login);
 router.post("/signup", register);
 router.post("/logout", logout);
 router.post('/bike', authenticateUser, postbike);
-router.post('/create-order', createOrder);
+router.post('/create-order', authenticateUser, createOrder);
 router.post('/paymentverification', verifyPayment);
 router.get('/bikes' ,getBikes);
 router.get('/getkey' ,getKey);

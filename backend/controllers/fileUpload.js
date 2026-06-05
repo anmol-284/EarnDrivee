@@ -84,7 +84,7 @@ exports.listBikeWithImage = async (req, res) => {
     });
   } catch (error) {
     console.error('Error while listing bike:', error);
-    res.status(400).json({
+    res.status(500).json({
       message: 'Failed to list bike',
       error: error.message
     });

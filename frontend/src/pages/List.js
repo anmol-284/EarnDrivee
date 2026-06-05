@@ -121,15 +121,15 @@ const ListBikePage = () => {
                                     </div>
                                     <div>
                                         <label htmlFor="state" className="block text-xs font-bold text-white">
-                                            Country
+                                            State
                                         </label>
-                                        <select id="city" className="w-full shadow-inner p-3 border border-gray-300 bg-gray-300 rounded text-black text-sm" value={city} onChange={(e) => setCity(e.target.value)}>
-                                            <option value="">Select City</option>
+                                        <select id="state" className="w-full shadow-inner p-3 border border-gray-300 bg-gray-300 rounded text-black text-sm" value={state} onChange={(e) => setState(e.target.value)}>
+                                            <option value="">Select State</option>
                                             <option value="Uttar Pradesh">Uttar Pradesh</option>
                                             <option value="Delhi">Delhi</option>
                                             <option value="Maharashtra">Maharashtra</option>
                                         </select>
-       
+
                                     </div>
 
                                     <div>

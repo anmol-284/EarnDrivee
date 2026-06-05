@@ -5,23 +5,23 @@ const userSchema = new mongoose.Schema(
         firstname: {
             type: String,
             required: true,
-            maxLenth: 50,
+            maxlength: 50,
         },
         lastname: {
             type: String,
             required: true,
-            maxLenth: 50,
+            maxlength: 50,
         },
         email: {
             type: String,
             required: true,
-            maxLenth: 50,
+            maxlength: 50,
             unique: true,
         },
         password: {
             type: String,
             required: true,
-            minLenth: 8,
+            minlength: 8,
         },
         image: {
             type: String,
@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema(
         createdAt: {
             type: Date,
             required: true,
-            default: Date.now(),
+            default: Date.now,
         },
     }
 )

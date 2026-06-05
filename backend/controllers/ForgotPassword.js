@@ -15,19 +15,19 @@ exports.forgot = async (req, res) => {
             return res.status(404).send({ Status: "User not existed" });
         }
 
-        const token = jwt.sign({ id: foundUser._id }, "Anmol", { expiresIn: "1d" });
+        const token = jwt.sign({ id: foundUser._id }, process.env.SUPER_SECRET, { expiresIn: "1d" });
 
         const transporter = nodemailer.createTransport({
             service: 'gmail',
-            host: 'smtp.gmail.com', 
+            host: 'smtp.gmail.com',
             auth: {
-                user: 'anmolsahu8423@gmail.com',
-                pass: 'htvy ryxz voii qisc'
+                user: process.env.MAIL_USER,
+                pass: process.env.MAIL_PASS
             }
         });
 
         const mailOptions = {
-            from: 'anmolsahu8423@gmail.com',
+            from: process.env.MAIL_USER,
             to: email,
             subject: 'Reset Password Link',
             text: `Please reset your password using the following link: http://localhost:3000/reset_password/${foundUser._id}/${token}`, // Plain text body
@@ -55,7 +55,7 @@ exports.reset = async (req, res) => {
 
     try {
         // Verify the token
-        const decoded = jwt.verify(token, "Anmol");
+        const decoded = jwt.verify(token, process.env.SUPER_SECRET);
 
         // Fetch the user by ID
         const User = await user.findById(id);
